@@ -4,7 +4,7 @@ from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
-    path('', views.menuprincipal_wiki, name='menuprincipal_wiki'),  # 👈 Esto redirige '/' a la vista principal
+    path('', views.menuprincipal_wiki, name='menuprincipal_wiki'),  
     path('animales/', views.animales, name='animales'),
     path('armas/', views.armas, name='armas'),
     path('construcciones/', views.construcciones, name='construcciones'),

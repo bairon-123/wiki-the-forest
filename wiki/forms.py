@@ -20,7 +20,7 @@ class RegistroUsuarioForm(forms.ModelForm):
 
     class Meta:
         model = Usuario
-        fields = ['email']  # Solo los campos que realmente existen en el modelo
+        fields = ['email'] 
 
     def clean_email(self):
         email = self.cleaned_data.get('email')

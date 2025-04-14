@@ -10,7 +10,7 @@ from django.contrib.auth import logout
 from django.contrib import messages
 from django.shortcuts import redirect
 
-# Vistas de render estático
+
 def animales(request):
     return render(request, 'wiki/Animales.html')
 
@@ -50,7 +50,10 @@ def recuperarcontra(request):
 def editar_informacion(request):
     return render(request, 'wiki/editar_informacion.html')
 
-# Vista "Mi Cuenta" con edición de perfil, contraseña y eliminación de cuenta
+
+
+
+# Vista mi cuenta con edición de perfil, contraseña y eliminación de cuenta
 
 def micuentatf(request):
     usuario_id = request.session.get('usuario_id')
@@ -82,7 +85,7 @@ def micuentatf(request):
             usuario.email = nuevo_email
             usuario.username = nuevo_username
             if nueva_password:
-                usuario.password = nueva_password  # Sin encriptar por ahora
+                usuario.password = nueva_password 
             usuario.save()
             messages.success(request, 'Datos actualizados correctamente.')
             return redirect('micuentatf')
@@ -160,7 +163,8 @@ def inicio_sesion_wiki(request):
 
     return render(request, 'wiki/inicio_sesion_wiki.html')
 
-# Vista de registro (texto plano)
+
+# Vista de registro
 def registrase_wiki(request):
     if request.method == 'POST':
         email = request.POST.get('email')

@@ -15,7 +15,7 @@ class UsuarioManager(BaseUserManager):
             raise ValueError('El correo es obligatorio')
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
-        user.set_password(password)  # encripta la contraseña
+        user.set_password(password) 
         user.save(using=self._db)
         return user
 
@@ -32,7 +32,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['rol']  # obligatorio para el modelo personalizado
+    REQUIRED_FIELDS = ['rol'] 
 
     objects = UsuarioManager()
 
