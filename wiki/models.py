@@ -11,17 +11,23 @@ class RolUsuario(models.Model):
 
 class UsuarioManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
-        if not email:
-            raise ValueError('El correo es obligatorio')
-        email = self.normalize_email(email)
+        rol_id = extra_fields.pop('rol', None)
+        if rol_id is not None and isinstance(rol_id, int):
+         extra_fields['rol'] = RolUsuario.objects.get(pk=rol_id)
+
         user = self.model(email=email, **extra_fields)
-        user.set_password(password) 
+        user.set_password(password)
         user.save(using=self._db)
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('rol') is None:
+            rol_admin, created = RolUsuario.objects.get_or_create(nombre='Administrador')
+            extra_fields['rol'] = rol_admin
+
         return self.create_user(email, password, **extra_fields)
 
 
@@ -32,7 +38,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['rol'] 
+    REQUIRED_FIELDS = ['rol']
 
     objects = UsuarioManager()
 

@@ -190,3 +190,4 @@ def registrase_wiki(request):
         return redirect('inicio_sesion_wiki')
 
     return render(request, 'wiki/registrase_wiki.html')
+
