@@ -57,7 +57,7 @@ def editar_informacion(request):
 
 def micuentatf(request):
     usuario_id = request.session.get('usuario_id')
-    
+
     if not usuario_id:
         messages.error(request, "Debes iniciar sesión primero.")
         return redirect('inicio_sesion_wiki')
@@ -71,11 +71,10 @@ def micuentatf(request):
     if request.method == 'POST':
         if 'guardar' in request.POST:
             nuevo_email = request.POST.get('email')
-            nuevo_username = request.POST.get('username')
             nueva_password = request.POST.get('password')
 
-            if not nuevo_email or not nuevo_username:
-                messages.error(request, 'Nombre de usuario y correo son obligatorios.')
+            if not nuevo_email:
+                messages.error(request, 'El correo es obligatorio.')
                 return redirect('micuentatf')
 
             if Usuario.objects.exclude(pk=usuario.pk).filter(email=nuevo_email).exists():
@@ -83,9 +82,10 @@ def micuentatf(request):
                 return redirect('micuentatf')
 
             usuario.email = nuevo_email
-            usuario.username = nuevo_username
+
             if nueva_password:
-                usuario.password = nueva_password 
+                usuario.password = nueva_password  # Si usas encriptación, aquí debería ir `make_password(nueva_password)`
+
             usuario.save()
             messages.success(request, 'Datos actualizados correctamente.')
             return redirect('micuentatf')
@@ -97,7 +97,6 @@ def micuentatf(request):
             return redirect('registrase_wiki')
 
     return render(request, 'wiki/micuentatf.html', {'usuario': usuario})
-
 
 def cerrar_sesion(request):
     logout(request)  
