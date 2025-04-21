@@ -101,3 +101,40 @@ nav {
 #separarsearch {
     padding-right: 20px;
 }
+
+body {
+    font-family: 'Spartan', sans-serif;
+    color: white;
+  }
+  
+  #piedepag {
+    background-color: #111;
+    color: #ccc;
+    font-size: 0.9rem;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .table td, .table th {
+    vertical-align: middle;
+  }
+  
+  .table a.btn {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+}
+
+.navbar .nav-link.panel-admin {
+    background-color: #ffc400;
+    color: black !important;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 8px;
+    margin-left: 10px;
+    transition: background 0.3s ease;
+  }
+  
+  .navbar .nav-link.panel-admin:hover {
+    background-color: #e6b800;
+    color: #000;
+  }

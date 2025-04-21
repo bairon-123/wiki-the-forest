@@ -1,3 +1,4 @@
+from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Usuario, RolUsuario
 from django.contrib import messages
@@ -9,6 +10,7 @@ from django.shortcuts import render
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.shortcuts import redirect
+from .models import RolUsuario 
 
 
 def animales(request):
@@ -131,6 +133,21 @@ def editar_informacion(request):
 
     return render(request, 'wiki/editar_informacion.html', {'usuario': usuario})
 
+def panel_administrador(request):
+    usuario_id = request.session.get('usuario_id')
+
+    if not usuario_id:
+        return redirect('inicio_sesion_wiki')
+
+    usuario = Usuario.objects.get(id=usuario_id)
+
+    # Solo permitir acceso a administradores
+    if usuario.rol.nombre != 'Administrador':
+        return HttpResponseForbidden("Acceso denegado. No tienes permisos para ver esta página.")
+
+    usuarios = Usuario.objects.all()
+    return render(request, 'wiki/panel_administrador.html', {'usuarios': usuarios})
+
 # Vista de inicio de sesión
 class SimpleBackend(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
@@ -191,3 +208,71 @@ def registrase_wiki(request):
 
     return render(request, 'wiki/registrase_wiki.html')
 
+@login_required(login_url='inicio_sesion_wiki')
+def editar_usuario(request, id):
+    if request.user.rol.nombre != 'Administrador':
+        return HttpResponseForbidden("No tienes permiso para editar usuarios.")
+    
+    usuario = get_object_or_404(Usuario, id=id)
+    roles = RolUsuario.objects.all()
+
+    if request.method == 'POST':
+        usuario.email = request.POST.get('email')
+        usuario.is_active = 'is_active' in request.POST
+        nuevo_rol_id = request.POST.get('rol')
+        if nuevo_rol_id:
+            usuario.rol = get_object_or_404(RolUsuario, id=nuevo_rol_id)
+        usuario.save()
+        messages.success(request, 'Usuario editado correctamente.')
+        return redirect('panel_administrador')
+
+    return render(request, 'wiki/editar_usuario.html', {'usuario': usuario, 'roles': roles})
+
+@login_required(login_url='inicio_sesion_wiki')
+def panel_administrador(request):
+    if request.user.rol.nombre != 'Administrador':
+        return HttpResponseForbidden("No tienes permiso para acceder a esta página.")
+    
+    usuarios = Usuario.objects.all()
+    return render(request, 'wiki/panel_administrador.html', {'usuarios': usuarios})
+
+@login_required(login_url='inicio_sesion_wiki')
+def eliminar_usuario(request, id):
+    if request.user.rol.nombre != 'Administrador':
+        return HttpResponseForbidden("No tienes permiso para eliminar usuarios.")
+    
+    usuario = get_object_or_404(Usuario, id=id)
+    if request.method == 'POST':
+        usuario.delete()
+        messages.success(request, "Usuario eliminado correctamente.")
+        return redirect('panel_administrador')
+
+    return render(request, 'wiki/confirmar_eliminar.html', {'usuario': usuario})
+
+def menuprincipal_wiki(request):
+    usuario_id = request.session.get('usuario_id')
+    usuario_actual = None
+
+    if usuario_id:
+        try:
+            usuario_actual = Usuario.objects.get(id=usuario_id)
+        except Usuario.DoesNotExist:
+            pass
+
+    return render(request, 'wiki/menuprincipal_wiki.html', {'usuario_actual': usuario_actual})
+
+def panel_administrador_redirect(request):
+    usuario_id = request.session.get('usuario_id')
+    if not usuario_id:
+        return redirect('inicio_sesion_wiki')
+
+    try:
+        usuario = Usuario.objects.get(id=usuario_id)
+    except Usuario.DoesNotExist:
+        return redirect('inicio_sesion_wiki')
+
+    if usuario.rol.nombre == 'Administrador':
+        return redirect('panel_administrador')
+    else:
+        messages.error(request, "No tienes permisos para acceder al panel de administrador.")
+        return redirect('menuprincipal_wiki')
