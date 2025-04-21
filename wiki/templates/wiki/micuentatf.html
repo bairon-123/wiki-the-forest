@@ -1,7 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,12 +18,9 @@
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="{% url 'menuprincipal_wiki' %}" id="fuente">The Forest Wiki</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link" href="{% url 'menuprincipal_wiki' %}">Inicio</a></li>
@@ -33,9 +29,10 @@
         <li class="nav-item"><a class="nav-link" href="{% url 'registrase_wiki' %}">Registrarse</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'inicio_sesion_wiki' %}">Iniciar sesión</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'micuentatf' %}">Mi Cuenta</a></li>
+        <li class="nav-item"><a class="nav-link text-warning fw-bold" href="{% url 'inicio_sesion_admin' %}">Panel Admin</a></li>
       </ul>
       <form class="d-flex" id="separarsearch">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="background: #ffffff;">
+        <input class="form-control me-2" type="search" placeholder="Search">
         <button class="btn btn-outline-success" type="submit">Buscar</button>
       </form>
     </div>
@@ -46,7 +43,11 @@
     <div class="perfil-usuario-header">
       <div class="perfil-usuario-portada">
         <div class="perfil-usuario-avatar">
-          <img src="{% static 'wiki/img_wiki/user.png' %}" alt="">
+          {% if usuario.imagen %}
+            <img src="{{ usuario.imagen.url }}" alt="Avatar del usuario">
+          {% else %}
+            <img src="{% static 'wiki/img_wiki/user.png' %}" alt="Avatar por defecto">
+          {% endif %}
         </div>
       </div>
     </div>
@@ -57,16 +58,23 @@
       </div>
 
       <div class="perfil-usuario-footer">
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <ul class="lista-datos">
             <li>
-              <i class="bi bi-envelope-fill"></i> Email:
+              <label>Email:</label>
               <input type="email" name="email" class="form-control mt-1" value="{{ usuario.email }}" required>
             </li>
             <li>
-              <i class="bi bi-key-fill"></i> Nueva Contraseña:
+              <label>Contraseña nueva:</label>
               <input type="password" name="password" class="form-control mt-1" placeholder="Ingresa nueva contraseña (opcional)">
+            </li>
+            <li>
+              <label>Imagen de perfil:</label><br>
+              {% if usuario.imagen %}
+                <img src="{{ usuario.imagen.url }}" width="100" class="img-thumbnail mb-2"><br>
+              {% endif %}
+              <input type="file" name="imagen" class="form-control mt-2">
             </li>
           </ul>
 
@@ -74,21 +82,20 @@
             <button type="submit" name="guardar" class="btn btn-success">Guardar Cambios</button>
             <button type="submit" name="eliminar" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar tu cuenta?')">Eliminar Cuenta</button>
             <a href="{% url 'cerrar_sesion' %}" class="btn btn-secondary">Cerrar Sesión</a>
-
-            <!-- MENSAJE -->
-            {% if messages %}
-              <div class="d-flex justify-content-end me-4 mt-3">
-                <div style="min-width: 20px; max-width: 100px;">
-                  {% for message in messages %}
-                    <div class="alert alert-success py-1 px-3 small shadow-sm text-end fade-out-message"
-                         style="font-size: 0.85rem; border-radius: 0.5rem;">
-                      {{ message }}
-                    </div>
-                  {% endfor %}
-                </div>
-              </div>
-            {% endif %}
           </div>
+
+          {% if messages %}
+            <div class="d-flex justify-content-end me-4 mt-3">
+              <div style="min-width: 20px; max-width: 100px;">
+                {% for message in messages %}
+                  <div class="alert alert-success py-1 px-3 small shadow-sm text-end fade-out-message"
+                       style="font-size: 0.85rem; border-radius: 0.5rem;">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
         </form>
       </div>
     </div>

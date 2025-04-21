@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Eliminar Arma - The Forest Wiki</title>
+    <link rel="stylesheet" href="{% static 'wiki/editar_animal.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-white">
+
+    <div class="container mt-5">
+        <h1 class="text-center color2">❌ Eliminar Arma</h1>
+
+        <div class="card bg-secondary mt-4 shadow">
+            <div class="card-body text-center">
+                <h4 class="mb-3">¿Estás seguro que deseas eliminar esta arma?</h4>
+                
+                <p><strong>Nombre:</strong> {{ arma.nombre }}</p>
+                <p><strong>Tipo:</strong> {{ arma.tipo }}</p>
+                <p><strong>Descripción:</strong> {{ arma.descripcion }}</p>
+
+                {% if arma.imagen %}
+                    <img src="{{ arma.imagen.url }}" alt="{{ arma.nombre }}" width="120" class="rounded my-3">
+                {% endif %}
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger me-2">Eliminar</button>
+                    <a href="{% url 'editar_armas' %}" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Eliminar Animal</title>
+    <link rel="stylesheet" href="{% static 'wiki/editar_animal.css' %}">
+</head>
+<body>
+    <div class="container mt-5 text-center">
+        <h2 class="color2">Eliminar Animal</h2>
+        <p class="text-light">Estás seguro que deseas eliminar a <strong>{{ animal.nombre }}</strong>?</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a href="{% url 'editar_animales' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>

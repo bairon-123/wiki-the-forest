@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
-from .models import Usuario, RolUsuario
+from .models import Arma, Usuario, RolUsuario, Animal
 
 
 @admin.register(Usuario)
@@ -12,7 +12,6 @@ class UsuarioAdmin(UserAdmin):
     ordering = ('email',)
     search_fields = ('email',)
 
-    # Campos visibles en el formulario de edición
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         (_('Información personal'), {'fields': ('rol',)}),
@@ -22,17 +21,39 @@ class UsuarioAdmin(UserAdmin):
         (_('Fechas importantes'), {'fields': ('last_login',)}),
     )
 
-    # Campos visibles al crear un nuevo usuario
-    add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('email', 'rol', 'password1', 'password2', 'is_staff', 'is_active')}
-        ),
-    )
-
 
 @admin.register(RolUsuario)
 class RolUsuarioAdmin(admin.ModelAdmin):
-    list_display = ('id', 'nombre')
+    list_display = ('nombre',)
     search_fields = ('nombre',)
-    ordering = ('id',)
+
+
+@admin.register(Animal)
+class AnimalAdmin(admin.ModelAdmin):
+    list_display = ( 'nombre', 'hostilidad', 'descripcion', 'imagen_preview')
+    search_fields = ('numero', 'nombre', 'hostilidad')
+    list_filter = ('hostilidad',)
+
+    def imagen_preview(self, obj):
+        return obj.imagen.url if obj.imagen else "-"
+    imagen_preview.short_description = "Imagen"
+
+    def has_module_permission(self, request):
+        return request.user.is_superuser
+
+    def has_view_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+    def has_add_permission(self, request):
+        return request.user.is_superuser
+
+    def has_change_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
+    
+@admin.register(Arma)
+class ArmaAdmin(admin.ModelAdmin):
+    list_display = ('numero', 'nombre', 'tipo')
+    search_fields = ('nombre', 'tipo')

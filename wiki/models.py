@@ -33,14 +33,30 @@ class UsuarioManager(BaseUserManager):
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
-    rol = models.ForeignKey(RolUsuario, on_delete=models.CASCADE)
+    rol = models.ForeignKey('RolUsuario', on_delete=models.SET_NULL, null=True)
+    imagen = models.ImageField(upload_to='usuarios/', null=True, blank=True)  # NUEVO
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['rol']
-
-    objects = UsuarioManager()
+    
+    
+class Animal(models.Model):
+    numero = models.IntegerField()
+    nombre = models.CharField(max_length=100)
+    hostilidad = models.CharField(max_length=50)
+    descripcion = models.TextField()
+    imagen = models.ImageField(upload_to='animales/', null=True, blank=True)
 
     def __str__(self):
-        return self.email
+        return f"{self.numero}. {self.nombre}"
+    
+class Arma(models.Model):
+    numero = models.PositiveIntegerField()
+    imagen = models.ImageField(upload_to='armas/')
+    nombre = models.CharField(max_length=100)
+    tipo = models.CharField(max_length=50)
+    descripcion = models.TextField()
+
+    def __str__(self):
+        return self.nombre

@@ -1,0 +1,45 @@
+{% load static %}
+<!-- editar_animal.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Animal</title>
+    <link rel="stylesheet" href="{% static 'wiki/editar_animal.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center color2">Editar Animal: {{ animal.nombre }}</h1>
+        <form method="POST" enctype="multipart/form-data" class="formulario-editar">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label>Nombre:</label>
+                <input type="text" name="nombre" value="{{ animal.nombre }}" required>
+            </div>
+            <div class="mb-3">
+                <label>Hostilidad:</label>
+                <select name="hostilidad" required>
+                    <option value="Pasivo" {% if animal.hostilidad == 'Pasivo' %}selected{% endif %}>Pasivo</option>
+                    <option value="Agresivo" {% if animal.hostilidad == 'Agresivo' %}selected{% endif %}>Agresivo</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>Descripción:</label>
+                <textarea name="descripcion" rows="4">{{ animal.descripcion }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label>Imagen actual:</label><br>
+                <img src="{{ animal.imagen.url }}" alt="{{ animal.nombre }}" width="100">
+            </div>
+            <div class="mb-3">
+                <label>Nueva imagen (opcional):</label>
+                <input type="file" name="imagen">
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-warning">Guardar Cambios</button>
+                <a href="{% url 'editar_animales' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -72,6 +72,11 @@ WSGI_APPLICATION = 'miproyecto.wsgi.application'
 LOGIN_URL = 'inicio_sesion_wiki'
 LOGIN_REDIRECT_URL = 'micuentatf'
 AUTH_USER_MODEL = 'wiki.Usuario'
+import os
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+DEBUG = True 
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases

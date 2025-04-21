@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -12,6 +12,27 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'wiki/estilo.css' %}">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    .flecha-izquierda, .flecha-derecha {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      background-color: rgba(0, 0, 0, 0.4);
+      border: none;
+      color: #ffc400;
+      z-index: 10;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .flecha-izquierda { left: 0; }
+    .flecha-derecha { right: 0; }
+
+    .flecha-izquierda:hover, .flecha-derecha:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+  </style>
 </head>
 
 <body style="background-color:black;">
@@ -27,33 +48,33 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link" href="{% url 'menuprincipal_wiki' %}">Inicio</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'forowiki' %}">Foro</a></li>
-        <li class="nav-item">
-          <a class="nav-link"
-             href="https://www.google.com/maps/place/R%C3%ADo+Imperial+460,+Valle+Grande,+Lampa"
-             target="_blank">Dirección</a>
-        </li>
+        <li class="nav-item"><a class="nav-link" href="https://www.google.com/maps/place/R%C3%ADo+Imperial+460,+Valle+Grande,+Lampa" target="_blank">Dirección</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'registrase_wiki' %}">Registrarse</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'inicio_sesion_wiki' %}">Iniciar sesión</a></li>
-
-        {% if user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'micuentatf' %}">Mi Cuenta</a>
-          </li>
-
-          {% if user.rol.nombre == 'Administrador' %}
-            <li class="nav-item">
-              <a class="nav-link text-warning fw-bold" href="{% url 'panel_administrador' %}">Panel Admin</a>
-            </li>
-          {% endif %}
-
-          <li class="nav-item">
-            <a class="nav-link text-danger" href="{% url 'cerrar_sesion' %}">Cerrar sesión</a>
-          </li>
-        {% endif %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'micuentatf' %}">Mi Cuenta</a></li>
+        <li class="nav-item"><a class="nav-link text-warning fw-bold" href="{% url 'inicio_sesion_admin' %}">Panel Admin</a></li>
       </ul>
-      <form class="d-flex" id="separarsearch">
-        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
+
+      {% if user.is_authenticated %}
+      <div class="d-flex align-items-center me-3">
+        {% if user.imagen %}
+          <img src="{{ user.imagen.url }}" alt="Perfil" class="rounded-circle me-2" style="width: 40px; height: 40px; border: 2px solid #ffc400;">
+        {% else %}
+          <img src="{% static 'wiki/img_wiki/user.png' %}" alt="Perfil" class="rounded-circle me-2" style="width: 40px; height: 40px; border: 2px solid #ffc400;">
+        {% endif %}
+        <span class="text-white me-3 d-none d-sm-inline">Perfil: {{ user.email }}</span>
+        <a href="{% url 'cerrar_sesion' %}" class="btn btn-outline-danger btn-sm">Cerrar Sesión</a>
+      </div>
+      {% else %}
+      <div class="d-flex">
+        <a href="{% url 'registrase_wiki' %}" class="btn btn-outline-light btn-sm me-2">Registrarse</a>
+        <a href="{% url 'inicio_sesion_wiki' %}" class="btn btn-outline-success btn-sm">Iniciar sesión</a>
+      </div>
+      {% endif %}
+
+      <form class="d-flex ms-3" id="separarsearch">
+        <input class="form-control me-2" type="search" placeholder="Buscar" style="background-color: #ffffff;">
+        <button class="btn btn-outline-success btn-sm" type="submit">Buscar</button>
       </form>
     </div>
   </nav>
@@ -79,45 +100,22 @@
           <div class="indicadores"></div>
         </div>
 
-        <div class="contenedor-principal">
+        <div class="contenedor-principal position-relative">
           <button role="button" id="flecha-izquierda" class="flecha-izquierda">
             <i class="fas fa-angle-left"></i>
           </button>
 
           <div class="contenedor-carousel">
             <div class="carousel">
-              <div class="pelicula">
-                <a href="{% url 'animales' %}"><img src="{% static 'wiki/img_wiki/animal2.png' %}" alt=""></a>
-                <center><p style="color: white;">Animales</p></center>
-              </div>
-              <div class="pelicula">
-                <a href="{% url 'lugarestf' %}"><img src="{% static 'wiki/img_wiki/mapaforest1.png' %}" alt=""></a>
-                <center><p style="color: white;">Mapa</p></center>
-              </div>
-              <div class="pelicula">
-                <a href="{% url 'enemigos' %}"><img src="{% static 'wiki/img_wiki/enemigosforest1.png' %}" alt=""></a>
-                <center><p style="color: white;">Enemigos</p></center>
-              </div>
-              <div class="pelicula">
-                <a href="{% url 'construcciones' %}"><img src="{% static 'wiki/img_wiki/buildings.png' %}" alt=""></a>
-                <center><p style="color: white;">Construcciones</p></center>
-              </div>
-              <div class="pelicula">
-                <a href="{% url 'flora' %}"><img src="{% static 'wiki/img_wiki/plantaforest.png' %}" alt=""></a>
-                <center><p style="color: white;">Plantas</p></center>
-              </div>
-              <div class="pelicula">
-                <a href="{% url 'armas' %}"><img src="{% static 'wiki/img_wiki/armasthf1.png' %}" alt=""></a>
-                <center><p style="color: white;">Armas</p></center>
-              </div>
-              <div class="pelicula">
-                <a href="{% url 'consumibles' %}"><img src="{% static 'wiki/img_wiki/consumibles.png' %}" alt=""></a>
-                <center><p style="color: white;">Consumibles</p></center>
-              </div>
-              <div class="pelicula">
-                <a href="{% url 'historia' %}"><img src="{% static 'wiki/img_wiki/Storytf.png' %}" alt=""></a>
-                <center><p style="color: white;">Historia</p></center>
-              </div>
+              {% comment %} Secciones del carrusel {% endcomment %}
+              <div class="pelicula"><a href="{% url 'animales' %}"><img src="{% static 'wiki/img_wiki/animal2.png' %}" alt=""><center><p style="color: white;">Animales</p></center></a></div>
+              <div class="pelicula"><a href="{% url 'lugarestf' %}"><img src="{% static 'wiki/img_wiki/mapaforest1.png' %}" alt=""><center><p style="color: white;">Mapa</p></center></a></div>
+              <div class="pelicula"><a href="{% url 'enemigos' %}"><img src="{% static 'wiki/img_wiki/enemigosforest1.png' %}" alt=""><center><p style="color: white;">Enemigos</p></center></a></div>
+              <div class="pelicula"><a href="{% url 'construcciones' %}"><img src="{% static 'wiki/img_wiki/buildings.png' %}" alt=""><center><p style="color: white;">Construcciones</p></center></a></div>
+              <div class="pelicula"><a href="{% url 'flora' %}"><img src="{% static 'wiki/img_wiki/plantaforest.png' %}" alt=""><center><p style="color: white;">Plantas</p></center></a></div>
+              <div class="pelicula"><a href="{% url 'armas' %}"><img src="{% static 'wiki/img_wiki/armasthf1.png' %}" alt=""><center><p style="color: white;">Armas</p></center></a></div>
+              <div class="pelicula"><a href="{% url 'consumibles' %}"><img src="{% static 'wiki/img_wiki/consumibles.png' %}" alt=""><center><p style="color: white;">Consumibles</p></center></a></div>
+              <div class="pelicula"><a href="{% url 'historia' %}"><img src="{% static 'wiki/img_wiki/Storytf.png' %}" alt=""><center><p style="color: white;">Historia</p></center></a></div>
             </div>
           </div>
 
@@ -129,11 +127,9 @@
     </div>
   </main>
 
-  <footer id="piedepag">
+  <footer id="piedepag" class="text-center text-light bg-dark py-3 mt-5">
     <p>Chile, Santiago de Chile | Fono: 227369936 | Email: tfwiki@gmail.com</p>
-    <p>Copyright 2022 Wiki 
-      <span style="color: #ffc400;">THE FOREST WIKI</span>
-    </p>
+    <p>&copy; 2022 Wiki <span style="color: #ffc400;">THE FOREST WIKI</span></p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

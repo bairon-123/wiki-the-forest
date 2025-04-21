@@ -41,6 +41,13 @@ nav{
 	font-size: 22px;
 	color: var(--rojo);
 }
+
+.rounded-circle {
+	border: 2px solid #ffc400 !important;
+	width: 40px !important;
+	height: 40px !important;
+}
+
 #separarsearch{
 	padding-right: 20px;
 }
@@ -123,62 +130,53 @@ header nav a.activo {
 }
 
 /* ---- ----- ----- Contenedor Titulo y Controles ----- ----- ----- */
-.contenedor-titulo-controles {
-	display: flex;
-	justify-content: space-between;
-	align-items: end;
-}
-
-.contenedor-titulo-controles h3 {
-	color: #fff;
-	font-size: 30px;
-}
-
-.contenedor-titulo-controles .indicadores button {
-	background: #fff;
-	height: 3px;
-	width: 10px;
-	cursor: pointer;
-	border: none;
-	margin-right: 2px;
-}
-
-.contenedor-titulo-controles .indicadores button:hover,
-.contenedor-titulo-controles .indicadores button.activo {
-	background: red;
-}
-
-
-/* ---- ----- ----- Contenedor Principal y Flechas ----- ----- ----- */
-.itemtf-recomendadas {
-	margin-bottom: 70px;
-}
-
-.itemtf-recomendadas .contenedor-principal {
+.contenedor-principal {
+	position: relative;
 	display: flex;
 	align-items: center;
-	position: relative;
+	justify-content: space-between;
 }
 
+.flecha {
+	background-color: rgba(255, 255, 255, 0.2);
+	border: none;
+	color: #ffc400;
+	font-size: 2.5rem;
+	padding: 15px 25px;
+	cursor: pointer;
+	z-index: 100;
+	transition: background-color 0.3s ease;
+}
+
+.flecha:hover {
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+.carrusel {
+	overflow-x: auto;
+	scroll-behavior: smooth;
+	display: flex;
+	gap: 20px;
+	width: 100%;
+}
+
+/* ---- ----- ----- Contenedor Principal y Flechas ----- ----- ----- */
 .itemtf-recomendadas .contenedor-principal .flecha-izquierda,
 .itemtf-recomendadas .contenedor-principal .flecha-derecha {
 	position: absolute;
 	border: none;
-	background: rgba(0,0,0,0.3);
-	font-size: 40px;
-	height: 50%;
-	top: calc(50% - 25%);
-	line-height: 40px;
-	width: 50px;
-	color: #fff;
+	background: rgba(255, 0, 0, 0.5);
+	font-size: 60px; /* más grande */
+	height: 100%; /* ocupa todo el alto del carrusel */
+	width: 70px; /* más ancho */
+	top: 0;
+	color: #ffc400;
 	cursor: pointer;
 	z-index: 500;
-	transition: .2s ease all;
-}
-
-.itemtf-recomendadas .contenedor-principal .flecha-izquierda:hover,
-.itemtf-recomendadas .contenedor-principal .flecha-derecha:hover {
-	background: rgba(0,0,0, .9);
+	transition: 0.3s ease all;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .itemtf-recomendadas .contenedor-principal .flecha-izquierda {
@@ -188,6 +186,12 @@ header nav a.activo {
 .itemtf-recomendadas .contenedor-principal .flecha-derecha {
 	right: 0;
 }
+
+.itemtf-recomendadas .contenedor-principal .flecha-izquierda:hover,
+.itemtf-recomendadas .contenedor-principal .flecha-derecha:hover {
+	background-color: rgba(0, 0, 0, 0.9);
+}
+
 
 /* ---- ----- ----- Carousel ----- ----- ----- */
 .itemtf-recomendadas .contenedor-carousel {
@@ -269,7 +273,8 @@ footer {
 }
 
 
-/*
+
+
 .footer-contenido{
 	display: flex;
 	align-items: center;

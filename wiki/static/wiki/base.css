@@ -1,0 +1,145 @@
+body#fondo {
+    background-color: #1E2126;
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos para la barra de navegación */
+.navbar {
+    background-color: #2c3e50 !important;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand#fuente {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    color: #ffffff;
+}
+
+.nav-link {
+    color: #ffffff !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffc400 !important;
+}
+
+/* Estilos para el menú desplegable de usuario */
+.dropdown-menu {
+    background-color: #343a40;
+    border: 1px solid #ffc400;
+}
+
+.dropdown-item {
+    color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #495057;
+    color: #ffc400;
+}
+
+/* Estilos para botones */
+.btn-outline-light {
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+.btn-outline-light:hover {
+    background-color: #ffffff;
+    color: #1E2126;
+}
+
+.btn-outline-success {
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.btn-outline-success:hover {
+    background-color: #28a745;
+    color: #ffffff;
+}
+
+/* Estilos para el contenido principal */
+main.container {
+    flex: 1;
+    padding-bottom: 2rem;
+}
+
+/* Estilos para el footer */
+footer#piedepag {
+    background-color: #212529;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+/* Estilos para la imagen de perfil */
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ffc400;
+    transition: transform 0.3s ease;
+}
+
+.profile-img:hover {
+    transform: scale(1.1);
+}
+
+/* Estilos para la barra de búsqueda */
+#separarsearch input {
+    min-width: 200px;
+}
+
+/* Efectos hover para elementos interactivos */
+.nav-item, .dropdown-toggle {
+    cursor: pointer;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    .navbar-brand#fuente {
+        font-size: 1.5rem;
+    }
+    
+    #separarsearch {
+        margin-top: 1rem;
+        width: 100%;
+    }
+    
+    .dropdown-menu {
+        width: 100%;
+    }
+}
+
+/* Estilos para la paginación */
+.pagination {
+    margin: 20px 0;
+}
+
+.page-item.active .page-link {
+    background-color: #ffc400;
+    border-color: #ffc400;
+    color: #1E2126;
+}
+
+.page-link {
+    color: #ffc400;
+    background-color: #2c3e50;
+    border: 1px solid #495057;
+}
+
+.page-link:hover {
+    color: #1E2126;
+    background-color: #ffc400;
+    border-color: #ffc400;
+}

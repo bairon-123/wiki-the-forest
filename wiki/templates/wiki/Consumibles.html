@@ -27,33 +27,37 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'menuprincipal_wiki' %}">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'forowiki' %}">Foro</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://www.google.com/maps/place/R%C3%ADo+Imperial+460,+Valle+Grande,+Lampa"
-             target="_blank">Dirección</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'registrase_wiki' %}">Registrarse</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'inicio_sesion_wiki' %}">Iniciar sesión</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'micuentatf' %}">Mi Cuenta</a>
-        </li>
-      </ul>
-      
-      <form class="d-flex" id="separar-derecha">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-      </form>
-    </div>
-  </nav>
+        <li class="nav-item"><a class="nav-link" href="{% url 'menuprincipal_wiki' %}">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'forowiki' %}">Foro</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://www.google.com/maps/place/R%C3%ADo+Imperial+460,+Valle+Grande,+Lampa" target="_blank">Dirección</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'registrase_wiki' %}">Registrarse</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'inicio_sesion_wiki' %}">Iniciar sesión</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'micuentatf' %}">Mi Cuenta</a></li>
+        <a class="nav-link text-warning fw-bold" href="{% url 'inicio_sesion_admin' %}">Panel Admin</a>
+        </ul>
+        {% if user.is_authenticated %}
+        <div class="d-flex align-items-center me-3">
+          {% if user.imagen %}
+            <img src="{{ user.imagen.url }}" alt="Perfil" class="rounded-circle me-2" style="width: 40px; height: 40px; border: 2px solid #ffc400;">
+          {% else %}
+            <img src="{% static 'wiki/img_wiki/user.png' %}" alt="Perfil" class="rounded-circle me-2" style="width: 40px; height: 40px; border: 2px solid #ffc400;">
+          {% endif %}
+          <span class="text-white me-3 d-none d-sm-inline">Perfil: {{ user.email }}</span>
+          <a href="{% url 'cerrar_sesion' %}" class="btn btn-outline-danger btn-sm">Cerrar Sesión</a>
+        </div>
+        {% else %}
+        <div class="d-flex">
+          <a href="{% url 'registrase_wiki' %}" class="btn btn-outline-light btn-sm me-2">Registrarse</a>
+          <a href="{% url 'inicio_sesion_wiki' %}" class="btn btn-outline-success btn-sm">Iniciar sesión</a>
+        </div>
+        {% endif %}
+  
+        <form class="d-flex ms-3" id="separarsearch">
+          <input class="form-control me-2" type="search" placeholder="Buscar" style="background-color: #ffffff;">
+          <button class="btn btn-outline-success btn-sm" type="submit">Buscar</button>
+        </form>
+      </div>
+    </nav>
 
 
     <div class="container">

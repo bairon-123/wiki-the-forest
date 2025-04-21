@@ -138,3 +138,8 @@ body {
     background-color: #e6b800;
     color: #000;
   }
+  
+  .rounded-circle {
+    border: 2px solid #ffc400;
+    box-sizing: border-box;
+  }

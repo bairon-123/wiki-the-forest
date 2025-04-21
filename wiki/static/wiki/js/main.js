@@ -1,19 +1,29 @@
-const fila = document.querySelector('.contenedor-carousel');
-const peliculas = document.querySelectorAll('.pelicula');
+const fila = document.getElementById('fila');
+const flechaDerecha = document.querySelector('.derecha');
+const flechaIzquierda = document.querySelector('.izquierda');
 
-const flechaIzquierda = document.getElementById('flecha-izquierda');
-const flechaDerecha = document.getElementById('flecha-derecha');
-
-// ? ----- ----- Event Listener para la flecha derecha. ----- -----
 flechaDerecha.addEventListener('click', () => {
 	fila.scrollLeft += fila.offsetWidth;
 
 	const indicadorActivo = document.querySelector('.indicadores .activo');
-	if(indicadorActivo.nextSibling){
-		indicadorActivo.nextSibling.classList.add('activo');
+	if (indicadorActivo && indicadorActivo.nextElementSibling) {
 		indicadorActivo.classList.remove('activo');
+		indicadorActivo.nextElementSibling.classList.add('activo');
 	}
 });
+
+flechaIzquierda.addEventListener('click', () => {
+	fila.scrollLeft -= fila.offsetWidth;
+
+	const indicadorActivo = document.querySelector('.indicadores .activo');
+	if (indicadorActivo && indicadorActivo.previousElementSibling) {
+		indicadorActivo.classList.remove('activo');
+		indicadorActivo.previousElementSibling.classList.add('activo');
+	}
+});
+
+// ? ----- ----- Event Listener para la flecha derecha. ----- -----
+
 
 // ? ----- ----- Event Listener para la flecha izquierda. ----- -----
 flechaIzquierda.addEventListener('click', () => {

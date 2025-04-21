@@ -57,6 +57,10 @@
    width: 400px;
 }
 
+
+.rounded-circle {
+    border: 2px solid #ffc400;
+}
 .colorl{
    color: #ffc400;
    font-family: georgia;

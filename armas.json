@@ -1,0 +1,167 @@
+[
+    {
+      "model": "wiki.arma",
+      "pk": 1,
+      "fields": {
+        "numero": 1,
+        "imagen": "armas/PlaneAxe.webp",
+        "nombre": "Hacha de avión",
+        "tipo": "Melee",
+        "descripcion": "El hacha de avión es el primer arma que encuentras en el juego, ya que aparece al salir del avión. El personaje la toma automáticamente. Sirve para talar árboles, cazar e incluso combatir."
+      }
+    },
+    {
+        "model": "wiki.arma",
+        "pk": 2,
+        "fields": {
+          "numero": 2,
+          "imagen": "Armas/CraftedAxe.webp",
+          "nombre": "Hacha artesanal",
+          "tipo": "Melee",
+          "descripcion": "El hacha artesanal es la más lenta, pero fácil de fabricar y útil al inicio del juego."
+        }
+      },
+      {
+        "model": "wiki.arma",
+        "pk": 3,
+        "fields": {
+          "numero": 3,
+          "imagen": "Armas/RustyAxe.webp",
+          "nombre": "Hacha oxidada",
+          "tipo": "Melee",
+          "descripcion": "Más lenta y con menos daño, pero gran capacidad de bloqueo."
+        }
+      },
+      {
+        "model": "wiki.arma",
+        "pk": 4,
+        "fields": {
+          "numero": 4,
+          "imagen": "Armas/ModernAxe.webp",
+          "nombre": "Hacha moderna",
+          "tipo": "Melee",
+          "descripcion": "La mejor hacha para cortar árboles. Buen daño y capacidad de derribo."
+        }
+      },
+      {
+        "model": "wiki.arma",
+        "pk": 5,
+        "fields": {
+          "numero": 5,
+          "imagen": "Armas/ClimbingAxe.webp",
+          "nombre": "Pico de escalada",
+          "tipo": "Melee",
+          "descripcion": "Permite escalar acantilados. Rápida pero de poco daño."
+        }
+      },
+      {
+        "model": "wiki.arma",
+        "pk": 6,
+        "fields": {
+          "numero": 6,
+          "imagen": "Armas/Machete.webp",
+          "nombre": "Machete",
+          "tipo": "Melee",
+          "descripcion": "Útil para recolectar palos y ataques rápidos."
+        }
+      },
+      {
+        "model": "wiki.arma",
+        "pk": 7,
+        "fields": {
+          "numero": 7,
+          "imagen": "Armas/Katana.webp",
+          "nombre": "Katana",
+          "tipo": "Melee",
+          "descripcion": "Arma muy rápida, pero con daño limitado."
+        }
+      },
+      {
+        "model": "wiki.arma",
+        "pk": 8,
+        "fields": {
+          "numero": 8,
+          "imagen": "Armas/WeakSpear.webp",
+          "nombre": "Lanza débil",
+          "tipo": "Melee, Distancia",
+          "descripcion": "Buena para cazar, puede lanzarse. Fácil de fabricar."
+        }
+      },
+      {
+        "model": "wiki.arma",
+        "pk": 9,
+        "fields": {
+          "numero": 9,
+          "imagen": "Armas/UpgradedSpear.webp",
+          "nombre": "Lanza mejorada",
+          "tipo": "Melee, Distancia",
+          "descripcion": "Gran herramienta de combate y caza. Rápida y efectiva."
+        }
+      },
+      {
+        "model": "wiki.arma",
+        "pk": 10,
+        "fields": {
+          "numero": 10,
+          "imagen": "Armas/Chainsaw.webp",
+          "nombre": "Motosierra",
+          "tipo": "Melee",
+          "descripcion": "Herramienta poderosa para talar y combate, requiere combustible."
+        }
+      },
+      {
+        "model": "wiki.arma",
+        "pk": 11,
+        "fields": {
+          "numero": 11,
+          "imagen": "Armas/CraftedBow.webp",
+          "nombre": "Arco artesanal",
+          "tipo": "Distancia",
+          "descripcion": "Lanza flechas sin mira. Útil con práctica y depende del tipo de flechas."
+        }
+      },
+      {
+        "model": "wiki.arma",
+        "pk": 12,
+        "fields": {
+          "numero": 12,
+          "imagen": "Armas/TurtleShell.webp",
+          "nombre": "Caparazón de tortuga",
+          "tipo": "Melee",
+          "descripcion": "Poco daño pero excelente para bloquear ataques."
+        }
+      },
+      {
+        "model": "wiki.arma",
+        "pk": 13,
+        "fields": {
+          "numero": 13,
+          "imagen": "Armas/Club.webp",
+          "nombre": "Mazo",
+          "tipo": "Melee",
+          "descripcion": "Arma lenta pero poderosa. Gran capacidad de bloqueo."
+        }
+      },
+      {
+        "model": "wiki.arma",
+        "pk": 14,
+        "fields": {
+          "numero": 14,
+          "imagen": "Armas/Dynamite.webp",
+          "nombre": "Dinamita",
+          "tipo": "Distancia",
+          "descripcion": "Explosivo poderoso. Útil contra enemigos, árboles y más."
+        }
+      },
+      {
+        "model": "wiki.arma",
+        "pk": 15,
+        "fields": {
+          "numero": 15,
+          "imagen": "Armas/Molotov.webp",
+          "nombre": "Molotov",
+          "tipo": "Distancia",
+          "descripcion": "Explota en contacto y quema enemigos. Área de fuego temporal."
+        }
+    }
+]
