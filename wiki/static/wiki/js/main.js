@@ -1,43 +1,60 @@
-const indicadorActivo = document.querySelector('.indicadores .activo');
-if (indicadorActivo && indicadorActivo.previousElementSibling) {
-	indicadorActivo.classList.remove('activo');
-	indicadorActivo.previousElementSibling.classList.add('activo');
+const fila = document.querySelector('.contenedor-carousel');
+const peliculas = document.querySelectorAll('.pelicula');
+
+const flechaIzquierda = document.getElementById('flecha-izquierda');
+const flechaDerecha = document.getElementById('flecha-derecha');
+
+// ? ----- ----- Event Listener para la flecha derecha. ----- -----
+flechaDerecha.addEventListener('click', () => {
+	fila.scrollLeft += fila.offsetWidth;
+
+	const indicadorActivo = document.querySelector('.indicadores .activo');
+	if(indicadorActivo.nextSibling){
+		indicadorActivo.nextSibling.classList.add('activo');
+		indicadorActivo.classList.remove('activo');
+	}
+});
+
+// ? ----- ----- Event Listener para la flecha izquierda. ----- -----
+flechaIzquierda.addEventListener('click', () => {
+	fila.scrollLeft -= fila.offsetWidth;
+
+	const indicadorActivo = document.querySelector('.indicadores .activo');
+	if(indicadorActivo.previousSibling){
+		indicadorActivo.previousSibling.classList.add('activo');
+		indicadorActivo.classList.remove('activo');
+	}
+});
+
+// ? ----- ----- Paginacion ----- -----
+const numeroPaginas = Math.ceil(peliculas.length / 5);
+for(let i = 0; i < numeroPaginas; i++){
+	const indicador = document.createElement('button');
+
+	if(i === 0){
+		indicador.classList.add('activo');
+	}
+
+	document.querySelector('.indicadores').appendChild(indicador);
+	indicador.addEventListener('click', (e) => {
+		fila.scrollLeft = i * fila.offsetWidth;
+
+		document.querySelector('.indicadores .activo').classList.remove('activo');
+		e.target.classList.add('activo');
+	});
 }
 
-  if (!fila || peliculas.length === 0) return;
+// ? ----- ----- Hover ----- -----
+peliculas.forEach((pelicula) => {
+	pelicula.addEventListener('mouseenter', (e) => {
+		const elemento = e.currentTarget;
+		setTimeout(() => {
+			peliculas.forEach(pelicula => pelicula.classList.remove('hover'));
+			elemento.classList.add('hover');
+		}, 300);
+	});
+});
 
-  flechaDerecha?.addEventListener('click', () => {
-    fila.scrollLeft += fila.offsetWidth;
-  });
-
-  flechaIzquierda?.addEventListener('click', () => {
-    fila.scrollLeft -= fila.offsetWidth;
-  });
-
-  // Indicadores
-  const numeroPaginas = Math.ceil(peliculas.length / 4);
-  const contenedorIndicadores = document.querySelector('.indicadores');
-
-  for (let i = 0; i < numeroPaginas; i++) {
-    const btn = document.createElement('button');
-    if (i === 0) btn.classList.add('activo');
-    contenedorIndicadores.appendChild(btn);
-
-    btn.addEventListener('click', (e) => {
-      fila.scrollLeft = i * fila.offsetWidth;
-      document.querySelector('.indicadores .activo')?.classList.remove('activo');
-      e.target.classList.add('activo');
-    });
-  }
-
-  peliculas.forEach((pelicula) => {
-    pelicula.addEventListener('mouseenter', () => {
-      peliculas.forEach(p => p.classList.remove('hover'));
-      pelicula.classList.add('hover');
-    });
-  });
-
-  fila.addEventListener('mouseleave', () => {
-    peliculas.forEach(p => p.classList.remove('hover'));
-  });
-  
+fila.addEventListener('mouseleave', () => {
+	peliculas.forEach(pelicula => pelicula.classList.remove('hover'));
+});

@@ -46,7 +46,7 @@ nav{
 	border: 2px solid #ffc400 !important;
 	width: 40px !important;
 	height: 40px !important;
-}
+  }
 
 #separarsearch{
 	padding-right: 20px;
@@ -130,40 +130,62 @@ header nav a.activo {
 }
 
 /* ---- ----- ----- Contenedor Titulo y Controles ----- ----- ----- */
-.contenedor-carousel {
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
+.contenedor-titulo-controles {
+	display: flex;
+	justify-content: space-between;
+	align-items: end;
 }
 
-.carousel {
-  display: flex;
-  gap: 15px;
-  width: max-content;
+.contenedor-titulo-controles h3 {
+	color: #fff;
+	font-size: 30px;
 }
 
-.pelicula {
-  min-width: 200px;
-  flex: 0 0 auto;
-  text-align: center;
+.contenedor-titulo-controles .indicadores button {
+	background: #fff;
+	height: 3px;
+	width: 10px;
+	cursor: pointer;
+	border: none;
+	margin-right: 2px;
 }
+
+.contenedor-titulo-controles .indicadores button:hover,
+.contenedor-titulo-controles .indicadores button.activo {
+	background: red;
+}
+
+
 /* ---- ----- ----- Contenedor Principal y Flechas ----- ----- ----- */
+.itemtf-recomendadas {
+	margin-bottom: 70px;
+}
+
+.itemtf-recomendadas .contenedor-principal {
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
 .itemtf-recomendadas .contenedor-principal .flecha-izquierda,
 .itemtf-recomendadas .contenedor-principal .flecha-derecha {
 	position: absolute;
 	border: none;
-	background: rgba(255, 0, 0, 0.5);
-	font-size: 60px; /* más grande */
-	height: 100%; /* ocupa todo el alto del carrusel */
-	width: 70px; /* más ancho */
-	top: 0;
-	color: #ffc400;
+	background: rgba(0,0,0,0.3);
+	font-size: 40px;
+	height: 50%;
+	top: calc(50% - 25%);
+	line-height: 40px;
+	width: 50px;
+	color: #fff;
 	cursor: pointer;
 	z-index: 500;
-	transition: 0.3s ease all;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	transition: .2s ease all;
+}
+
+.itemtf-recomendadas .contenedor-principal .flecha-izquierda:hover,
+.itemtf-recomendadas .contenedor-principal .flecha-derecha:hover {
+	background: rgba(0,0,0, .9);
 }
 
 .itemtf-recomendadas .contenedor-principal .flecha-izquierda {
@@ -173,13 +195,6 @@ header nav a.activo {
 .itemtf-recomendadas .contenedor-principal .flecha-derecha {
 	right: 0;
 }
-
-.itemtf-recomendadas .contenedor-principal .flecha-izquierda:hover,
-.itemtf-recomendadas .contenedor-principal .flecha-derecha:hover {
-	background-color: rgba(0, 0, 0, 0.9);
-}
-
-
 
 /* ---- ----- ----- Carousel ----- ----- ----- */
 .itemtf-recomendadas .contenedor-carousel {
@@ -262,7 +277,7 @@ footer {
 
 
 
-
+/*
 .footer-contenido{
 	display: flex;
 	align-items: center;
