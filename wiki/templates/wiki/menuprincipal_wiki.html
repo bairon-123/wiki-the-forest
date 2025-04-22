@@ -12,27 +12,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'wiki/estilo.css' %}">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    .flecha-izquierda, .flecha-derecha {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 3rem;
-      background-color: rgba(0, 0, 0, 0.4);
-      border: none;
-      color: #ffc400;
-      z-index: 10;
-      padding: 10px;
-      cursor: pointer;
-    }
-
-    .flecha-izquierda { left: 0; }
-    .flecha-derecha { right: 0; }
-
-    .flecha-izquierda:hover, .flecha-derecha:hover {
-      background-color: rgba(0, 0, 0, 0.7);
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body style="background-color:black;">
@@ -83,60 +63,52 @@
     <div class="wiki">
       <div class="contenedor">
         <h3 class="titulo">The Forest Wiki</h3>
-        <p class="descripcion">
-          Página Oficial de The Forest creada por programadores de Duoc UC fanáticos del juego.
-          ¡Descubre y comparte tus conocimientos!
-        </p>
+        <p class="descripcion">¡Descubre y comparte tus conocimientos!</p>
         <a href="https://www.eneba.com/latam/steam-the-forest-steam-key-global" target="_blank">
           <button class="btn btn-dark">Compra The Forest</button>
         </a>
       </div>
     </div>
 
-    <div class="container-fluid">
-      <div class="itemtf-recomendadas contenedor">
-        <div class="contenedor-titulo-controles">
-          <h3 id="fuente">Contenido The Forest</h3>
-          <div class="indicadores"></div>
-        </div>
+    <!-- CARRUSEL -->
+    <div class="itemtf-recomendadas contenedor">
+      <div class="contenedor-titulo-controles">
+        <h3 id="fuente">Contenido The Forest</h3>
+        <div class="indicadores"></div>
+      </div>
 
-        <div class="contenedor-principal position-relative">
-          <button role="button" id="flecha-izquierda" class="flecha-izquierda">
-            <i class="fas fa-angle-left"></i>
-          </button>
+      <div class="contenedor-principal position-relative">
+        <button role="button" class="flecha-izquierda izquierda">
+          <i class="fas fa-angle-left"></i>
+        </button>
 
-          <div class="contenedor-carousel">
-            <div class="carousel">
-              {% comment %} Secciones del carrusel {% endcomment %}
-              <div class="pelicula"><a href="{% url 'animales' %}"><img src="{% static 'wiki/img_wiki/animal2.png' %}" alt=""><center><p style="color: white;">Animales</p></center></a></div>
-              <div class="pelicula"><a href="{% url 'lugarestf' %}"><img src="{% static 'wiki/img_wiki/mapaforest1.png' %}" alt=""><center><p style="color: white;">Mapa</p></center></a></div>
-              <div class="pelicula"><a href="{% url 'enemigos' %}"><img src="{% static 'wiki/img_wiki/enemigosforest1.png' %}" alt=""><center><p style="color: white;">Enemigos</p></center></a></div>
-              <div class="pelicula"><a href="{% url 'construcciones' %}"><img src="{% static 'wiki/img_wiki/buildings.png' %}" alt=""><center><p style="color: white;">Construcciones</p></center></a></div>
-              <div class="pelicula"><a href="{% url 'flora' %}"><img src="{% static 'wiki/img_wiki/plantaforest.png' %}" alt=""><center><p style="color: white;">Plantas</p></center></a></div>
-              <div class="pelicula"><a href="{% url 'armas' %}"><img src="{% static 'wiki/img_wiki/armasthf1.png' %}" alt=""><center><p style="color: white;">Armas</p></center></a></div>
-              <div class="pelicula"><a href="{% url 'consumibles' %}"><img src="{% static 'wiki/img_wiki/consumibles.png' %}" alt=""><center><p style="color: white;">Consumibles</p></center></a></div>
-              <div class="pelicula"><a href="{% url 'historia' %}"><img src="{% static 'wiki/img_wiki/Storytf.png' %}" alt=""><center><p style="color: white;">Historia</p></center></a></div>
-            </div>
+        <div class="contenedor-carousel">
+          <div class="carousel" id="fila">
+            <div class="pelicula"><a href="{% url 'animales' %}"><img src="{% static 'wiki/img_wiki/animal2.png' %}"><center><p>Animales</p></center></a></div>
+            <div class="pelicula"><a href="{% url 'lugarestf' %}"><img src="{% static 'wiki/img_wiki/mapaforest1.png' %}"><center><p>Mapa</p></center></a></div>
+            <div class="pelicula"><a href="{% url 'enemigos' %}"><img src="{% static 'wiki/img_wiki/enemigosforest1.png' %}"><center><p>Enemigos</p></center></a></div>
+            <div class="pelicula"><a href="{% url 'construcciones' %}"><img src="{% static 'wiki/img_wiki/buildings.png' %}"><center><p>Construcciones</p></center></a></div>
+            <div class="pelicula"><a href="{% url 'flora' %}"><img src="{% static 'wiki/img_wiki/plantaforest.png' %}"><center><p>Plantas</p></center></a></div>
+            <div class="pelicula"><a href="{% url 'armas' %}"><img src="{% static 'wiki/img_wiki/armasthf1.png' %}"><center><p>Armas</p></center></a></div>
+            <div class="pelicula"><a href="{% url 'consumibles' %}"><img src="{% static 'wiki/img_wiki/consumibles.png' %}"><center><p>Consumibles</p></center></a></div>
+            <div class="pelicula"><a href="{% url 'historia' %}"><img src="{% static 'wiki/img_wiki/Storytf.png' %}"><center><p>Historia</p></center></a></div>
           </div>
-
-          <button role="button" id="flecha-derecha" class="flecha-derecha">
-            <i class="fas fa-angle-right"></i>
-          </button>
         </div>
+
+        <button role="button" class="flecha-derecha derecha">
+          <i class="fas fa-angle-right"></i>
+        </button>
       </div>
     </div>
   </main>
 
-  <footer id="piedepag" class="text-center text-light bg-dark py-3 mt-5">
-    <p>Chile, Santiago de Chile | Fono: 227369936 | Email: tfwiki@gmail.com</p>
+  <footer class="text-center text-light bg-dark py-3 mt-5" id="piedepag">
+    <p>Chile, Santiago de Chile | Email: tfwiki@gmail.com</p>
     <p>&copy; 2022 Wiki <span style="color: #ffc400;">THE FOREST WIKI</span></p>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
   <script src="{% static 'wiki/js/main.js' %}"></script>
 </body>
-
 </html>

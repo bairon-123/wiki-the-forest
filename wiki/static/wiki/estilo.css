@@ -130,36 +130,23 @@ header nav a.activo {
 }
 
 /* ---- ----- ----- Contenedor Titulo y Controles ----- ----- ----- */
-.contenedor-principal {
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+.contenedor-carousel {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
-.flecha {
-	background-color: rgba(255, 255, 255, 0.2);
-	border: none;
-	color: #ffc400;
-	font-size: 2.5rem;
-	padding: 15px 25px;
-	cursor: pointer;
-	z-index: 100;
-	transition: background-color 0.3s ease;
+.carousel {
+  display: flex;
+  gap: 15px;
+  width: max-content;
 }
 
-.flecha:hover {
-	background-color: rgba(255, 255, 255, 0.5);
+.pelicula {
+  min-width: 200px;
+  flex: 0 0 auto;
+  text-align: center;
 }
-
-.carrusel {
-	overflow-x: auto;
-	scroll-behavior: smooth;
-	display: flex;
-	gap: 20px;
-	width: 100%;
-}
-
 /* ---- ----- ----- Contenedor Principal y Flechas ----- ----- ----- */
 .itemtf-recomendadas .contenedor-principal .flecha-izquierda,
 .itemtf-recomendadas .contenedor-principal .flecha-derecha {
@@ -191,6 +178,7 @@ header nav a.activo {
 .itemtf-recomendadas .contenedor-principal .flecha-derecha:hover {
 	background-color: rgba(0, 0, 0, 0.9);
 }
+
 
 
 /* ---- ----- ----- Carousel ----- ----- ----- */
