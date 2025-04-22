@@ -39,6 +39,10 @@ urlpatterns = [
     path('editar_arma/<int:id>/', views.editar_arma, name='editar_arma'),
     path('eliminar_arma/<int:id>/', views.eliminar_arma, name='eliminar_arma'),
     path('editar_armas/', views.editar_armas, name='editar_armas'),
+
+    path('enemigos/editar/', views.lista_enemigos, name='editar_enemigos'),
+    path('enemigos/editar/<int:enemigo_id>/', views.editar_enemigo, name='editar_enemigo'),
+    path('enemigos/eliminar/<int:enemigo_id>/', views.eliminar_enemigo, name='eliminar_enemigo'),
 ]
 
 if settings.DEBUG:

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Usuario
+from .models import Enemigo, Usuario
 from django.contrib.auth.hashers import make_password
 
 class RegistroUsuarioForm(forms.ModelForm):
@@ -43,3 +43,8 @@ class RegistroUsuarioForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+    
+class EnemigoForm(forms.ModelForm):
+    class Meta:
+        model = Enemigo
+        fields = ['nombre', 'tipo', 'descripcion', 'imagen']

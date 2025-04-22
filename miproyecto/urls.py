@@ -22,3 +22,4 @@ urlpatterns = [
     path('', include('wiki.urls')),
     path('', include('wiki.urls')), 
 ]
+

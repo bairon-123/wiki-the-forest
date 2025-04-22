@@ -60,3 +60,12 @@ class Arma(models.Model):
 
     def __str__(self):
         return self.nombre
+    
+class Enemigo(models.Model):
+    nombre = models.CharField(max_length=100)
+    tipo = models.CharField(max_length=100)
+    descripcion = models.TextField()
+    imagen = models.ImageField(upload_to='wiki/imagenes/Enemigos/')
+
+    def __str__(self):
+        return self.nombre

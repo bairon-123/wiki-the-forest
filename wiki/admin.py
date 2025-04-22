@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
-from .models import Arma, Usuario, RolUsuario, Animal
+from .models import Arma, Usuario, RolUsuario, Animal, Enemigo
 
 
 @admin.register(Usuario)
@@ -56,4 +56,9 @@ class AnimalAdmin(admin.ModelAdmin):
 @admin.register(Arma)
 class ArmaAdmin(admin.ModelAdmin):
     list_display = ('numero', 'nombre', 'tipo')
+    search_fields = ('nombre', 'tipo')
+
+@admin.register(Enemigo)
+class EnemigoAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'tipo')
     search_fields = ('nombre', 'tipo')

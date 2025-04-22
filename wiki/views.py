@@ -6,7 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.hashers import make_password, check_password
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import Arma, Usuario, RolUsuario, Animal
+from .forms import EnemigoForm
+from .models import Arma, Enemigo, Usuario, RolUsuario, Animal
 
 def animales(request):
     animales_list = Animal.objects.all().order_by('numero')
@@ -287,6 +288,7 @@ def eliminar_animal(request, id):
 
     return render(request, 'wiki/eliminar_animal.html', {'animal': animal})
 
+
 @login_required
 def editar_armas(request):
     armas_list = Arma.objects.all().order_by('numero') 
@@ -316,6 +318,8 @@ def editar_arma(request, id):
         return redirect('editar_armas')
     return render(request, 'wiki/editar_arma.html', {'arma': arma})
 
+
+
 @login_required
 def eliminar_arma(request, id):
     arma = get_object_or_404(Arma, id=id)
@@ -324,3 +328,39 @@ def eliminar_arma(request, id):
         messages.success(request, "Arma eliminada correctamente.")
         return redirect('editar_armas')
     return render(request, 'wiki/eliminar_arma.html', {'arma': arma})
+
+def enemigos_view(request):
+    enemigos = Enemigo.objects.all().order_by('id')
+    return render(request, 'wiki/enemigos.html', {'enemigos': enemigos})
+
+@login_required
+def lista_enemigos(request):
+    enemigos = Enemigo.objects.all()
+    return render(request, 'wiki/editar_enemigos.html', {'enemigos': enemigos})
+
+@login_required
+def editar_enemigo(request, enemigo_id):
+    enemigo = get_object_or_404(Enemigo, pk=enemigo_id)
+    if request.method == 'POST':
+        form = EnemigoForm(request.POST, request.FILES, instance=enemigo)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_enemigos')
+    else:
+        form = EnemigoForm(instance=enemigo)
+    return render(request, 'wiki/editar_enemigo.html', {'form': form, 'enemigo': enemigo})
+
+@login_required
+def eliminar_enemigo(request, enemigo_id):
+    enemigo = get_object_or_404(Enemigo, pk=enemigo_id)
+    if request.method == 'POST':
+        enemigo.delete()
+        return redirect('lista_enemigos')
+    return render(request, 'wiki/eliminar_enemigo.html', {'enemigo': enemigo})
+
+def enemigos(request):
+    lista_enemigos = Enemigo.objects.all()
+    paginator = Paginator(lista_enemigos, 4)  # 4 enemigos por página
+    page_number = request.GET.get('page')
+    enemigos_pagina = paginator.get_page(page_number)
+    return render(request, 'wiki/enemigos.html', {'enemigos': enemigos_pagina})
