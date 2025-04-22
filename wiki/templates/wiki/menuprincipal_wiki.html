@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -12,6 +12,58 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'wiki/estilo.css' %}">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    .pelicula img {
+      width: 100px;
+      height: auto;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .flecha-izquierda,
+    .flecha-derecha {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      z-index: 10;
+    }
+
+    .flecha-izquierda {
+      left: 0;
+    }
+
+    .flecha-derecha {
+      right: 0;
+    }
+
+    .contenedor-principal {
+      position: relative;
+    }
+
+    .pelicula {
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body style="background-color:black;">
@@ -72,75 +124,51 @@
       </div>
     </div>
 
-    <div class="container-fluid">
-      <div class="itemtf-recomendadas contenedor">
-        <div class="contenedor-titulo-controles">
-          <h3 id="fuente">Contenido The Forest</h3>
-          <div class="indicadores"></div>
-        </div>
+    <div class="itemtf-recomendadas contenedor">
+      <div class="contenedor-titulo-controles">
+        <h3 id="fuente">Contenido The Forest</h3>
+        <div class="indicadores"></div>
+      </div>
 
-        <div class="contenedor-principal">
-          <button role="button" id="flecha-izquierda" class="flecha-izquierda">
-            <i class="fas fa-angle-left"></i>
-          </button>
+      <div class="contenedor-principal">
+        <button class="flecha-izquierda" id="btn-izquierda"><i class="fas fa-angle-left"></i></button>
 
-          <div class="contenedor-carousel">
-            <div class="carousel">
-              <div class="pelicula">
-                <a href="{% url 'animales' %}"><img src="{% static 'wiki/img_wiki/animal2.png' %}" alt=""></a>
-                <center><p style="color: white;">Animales</p></center>
-              </div>
-              <div class="pelicula">
-                <a href="{% url 'lugarestf' %}"><img src="{% static 'wiki/img_wiki/mapaforest1.png' %}" alt=""></a>
-                <center><p style="color: white;">Mapa</p></center>
-              </div>
-              <div class="pelicula">
-                <a href="{% url 'enemigos' %}"><img src="{% static 'wiki/img_wiki/enemigosforest1.png' %}" alt=""></a>
-                <center><p style="color: white;">Enemigos</p></center>
-              </div>
-              <div class="pelicula">
-                <a href="{% url 'construcciones' %}"><img src="{% static 'wiki/img_wiki/buildings.png' %}" alt=""></a>
-                <center><p style="color: white;">Construcciones</p></center>
-              </div>
-              <div class="pelicula">
-                <a href="{% url 'flora' %}"><img src="{% static 'wiki/img_wiki/plantaforest.png' %}" alt=""></a>
-                <center><p style="color: white;">Plantas</p></center>
-              </div>
-              <div class="pelicula">
-                <a href="{% url 'armas' %}"><img src="{% static 'wiki/img_wiki/armasthf1.png' %}" alt=""></a>
-                <center><p style="color: white;">Armas</p></center>
-              </div>
-              <div class="pelicula">
-                <a href="{% url 'consumibles' %}"><img src="{% static 'wiki/img_wiki/consumibles.png' %}" alt=""></a>
-                <center><p style="color: white;">Consumibles</p></center>
-              </div>
-              <div class="pelicula">
-                <a href="{% url 'historia' %}"><img src="{% static 'wiki/img_wiki/Storytf.png' %}" alt=""></a>
-                <center><p style="color: white;">Historia</p></center>
-              </div>
-            </div>
+        <div class="contenedor-carousel">
+          <div class="carousel" id="fila">
+            <div class="pelicula"><a href="{% url 'animales' %}"><img src="{% static 'wiki/img_wiki/animal2.png' %}" alt=""><p style="color: white;">Animales</p></a></div>
+            <div class="pelicula"><a href="{% url 'lugarestf' %}"><img src="{% static 'wiki/img_wiki/mapaforest1.png' %}" alt=""><p style="color: white;">Mapa</p></a></div>
+            <div class="pelicula"><a href="{% url 'enemigos' %}"><img src="{% static 'wiki/img_wiki/enemigosforest1.png' %}" alt=""><p style="color: white;">Enemigos</p></a></div>
+            <div class="pelicula"><a href="{% url 'construcciones' %}"><img src="{% static 'wiki/img_wiki/buildings.png' %}" alt=""><p style="color: white;">Construcciones</p></a></div>
+            <div class="pelicula"><a href="{% url 'flora' %}"><img src="{% static 'wiki/img_wiki/plantaforest.png' %}" alt=""><p style="color: white;">Plantas</p></a></div>
+            <div class="pelicula"><a href="{% url 'armas' %}"><img src="{% static 'wiki/img_wiki/armasthf1.png' %}" alt=""><p style="color: white;">Armas</p></a></div>
+            <div class="pelicula"><a href="{% url 'consumibles' %}"><img src="{% static 'wiki/img_wiki/consumibles.png' %}" alt=""><p style="color: white;">Consumibles</p></a></div>
+            <div class="pelicula"><a href="{% url 'historia' %}"><img src="{% static 'wiki/img_wiki/Storytf.png' %}" alt=""><p style="color: white;">Historia</p></a></div>
           </div>
-
-          <button role="button" id="flecha-derecha" class="flecha-derecha">
-            <i class="fas fa-angle-right"></i>
-          </button>
         </div>
+
+        <button class="flecha-derecha" id="btn-derecha"><i class="fas fa-angle-right"></i></button>
       </div>
     </div>
   </main>
 
-  <footer id="piedepag">
+  <footer id="piedepag" class="text-center text-light bg-dark py-3 mt-5">
     <p>Chile, Santiago de Chile | Fono: 227369936 | Email: tfwiki@gmail.com</p>
-    <p>Copyright 2022 Wiki 
-      <span style="color: #ffc400;">THE FOREST WIKI</span>
-    </p>
+    <p>&copy; 2022 Wiki <span style="color: #ffc400;">THE FOREST WIKI</span></p>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-          crossorigin="anonymous"></script>
-  <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
-  <script src="{% static 'wiki/js/main.js' %}"></script>
+  <script>
+    const fila = document.getElementById("fila");
+    const btnIzquierda = document.getElementById("btn-izquierda");
+    const btnDerecha = document.getElementById("btn-derecha");
+
+    btnDerecha.addEventListener("click", () => {
+      fila.scrollLeft += 300;
+    });
+
+    btnIzquierda.addEventListener("click", () => {
+      fila.scrollLeft -= 300;
+    });
+  </script>
 </body>
 
 </html>
